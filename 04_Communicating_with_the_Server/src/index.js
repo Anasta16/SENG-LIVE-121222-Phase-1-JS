@@ -1,3 +1,27 @@
+fetch(`http://localhost:3000/books`)
+.then((response) => response.json())
+.then((books) => {
+    console.log(books[2])
+  books.forEach(renderBook);
+  })
+  .catch((event) => console.log(event))
+//     const storesDiv = document.createElement('div');
+//     storesDiv.textContent = store.location
+//     console.log(storesDiv)
+//     const createP = document.createElement('p');
+//     createP.textContent = storesDiv.value
+//     storesDiv.appendChild(createP)
+//     document.body.appendChild(storesDiv)
+//     const newButton = document.createElement('button')
+//     newButton.innerText = "delete"
+//     newButton.addEventListener('click', () => {
+//       console.log('button working so far')
+//     })
+//     createP.appendChild(newButton)
+//   })
+
+// })
+
 function formatPrice(price) {
   return '$' + Number.parseFloat(price).toFixed(2);
 }
@@ -125,7 +149,7 @@ bookForm.addEventListener('submit', (e) => {
 
 renderHeader(bookStore)
 renderFooter(bookStore)
-bookStore.inventory.forEach(renderBook)
+// bookStore.inventory.forEach(renderBook)
 
 
 
