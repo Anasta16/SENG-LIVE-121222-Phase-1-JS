@@ -74,17 +74,50 @@ const inventory = [
 
 // Start here!
 
-
-
-
 // 💡 Arrow functions vs regular functions
 
+function helloWorld() {
+  let secret = "I love dates... The fruit";
+  return "Hello, world!";
+  
+}
+
+helloWorld();
+
+function formatPrice(priceNum) {
+  return '$' + Number.parseFloat(priceNum).toFixed(2);
+}
+
+// concatenation of string and number
+
+console.log('formatPrice', formatPrice(inventory[0].price))
 // ✅ create an arrow function version of the formatPrice function
 
-
+// const formatPrice = (priceNum) => {
+//   return '$' + Number.parseFloat(priceNum).toFixed(2);
+// }    ======>  arrow function
 
 // ✅ create a blurb() function that accepts a book as an argument and logs a message in the following format:
 // 'Eloquent JavaScript: A Modern Introduction to Programming by Marjin Haverbeke is on sale for $10.00'
+// books look like:
+// {
+// id: 1,
+//     title: 'Eloquent JavaScript: A Modern Introduction to Programming',
+//     author: 'Marjin Haverbeke',
+//     price: 10.00,
+//     reviews: [{userID: 1, content:'Good book, but not great for new coders'}],
+//     inventory: 10,
+//     imageUrl: 'https://images-na.ssl-images-amazon.com/images/I/51IKycqTPUL._SX218_BO1,204,203,200_QL40_FMwebp_.jpg'
+//   },
+
+function blurb(book) {
+  const title = book.title;
+  const author = book.author;
+  const price = formatPrice(book.price);
+  return `${title} by ${author} is on sale for ${price}`;
+}
+
+console.log('blurb', blurb(inventory[0]));
 
 
 
@@ -106,17 +139,24 @@ const inventory = [
 
 // 💡 Practice using callbacks for iteration
 
-
+const nums = [1, 2, 3];
+nums.forEach(num => console.log(num+num));
 
 // ✅ Create an array of the prices of all of the books
-
-
+let prices = [];
+inventory.forEach(book => prices.push(formatPrice(book.price)));
+console.log('prices', prices);
 
 // ✅ Create an array of simplified book objects
 
 
-
 // ✅ Create an array of strings from the inventory in the following format:
+
+//const blurbs = inventory.map(book => blurb(book))
+const blurbs = inventory.map(blurb)
+
+console.log('blurbs', blurbs)
+
 // 'Eloquent JavaScript: A Modern Introduction to Programming by Marjin Haverbeke is on sale for $10.00'
 
 

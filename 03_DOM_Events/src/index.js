@@ -48,11 +48,80 @@ function renderBook(book) {
 
   const btn = document.createElement('button');
   btn.textContent = 'Delete';
+  btn.addEventListener('click', (e) => { 
+    li.remove();
+  })
 
   li.append(h3, pAuthor, pPrice, img, btn);
 
   document.querySelector('#book-list').append(li);
 }
+
+
+////////////////////////////////////////////////////////////////////////
+// Event listeners
+////////////
+
+const toggleBookFormBtn = document.querySelector('#toggleForm');
+const bookForm = document.querySelector('#book-form');
+
+
+toggleBookFormBtn.addEventListener('click', (e) => {
+  const formHidden = !bookForm.classList.toggle('collapsed')
+  console.log('formHidden', formHidden);
+  toggleBookFormBtn.textContent = formHidden ? "New Book" : "Hide Book Form";
+})
+
+document.addEventListener('keydown,', (e) => {
+  if (e.key === 'Escape') {
+    console.log('you just hit escape!')
+    if (!bookForm.classList.contains('collapsed')) {
+      const formShowing = bookForm.classList.add('collapsed')
+      toggleBookFormBtn.textContent = "New Book";
+    }
+  }
+})
+
+bookForm.addEventListener('submit', (e) => { 
+  e.preventDefault()
+  console.log('submitting');
+  // we need to create a book from the form that looks like this
+
+//   id:3,
+//   title: 'JavaScript: The Good Parts',
+//   author: 'Douglas Crockford',
+//   price: 36.00,
+//   reviews: [{userID: 25, content:'I disagree with everything in this book'}, {userID: 250, content:'Only JS book anyone needs'}],
+//   inventory: 8,
+//   imageUrl: 'https://images-na.ssl-images-amazon.com/images/I/5131OWtQRaL._SX218_BO1,204,203,200_QL40_FMwebp_.jpg',
+// },
+
+
+const book = {
+
+title: e.target.title.value,
+author: e.target.author.value,
+price: parseFloat(e.target.price.value),
+inventory: parseInt(e.target.inventory.value),
+imageUrl: e.target.imageUrl.value
+};
+
+renderBook(book);
+e.target.reset(); // when form is filled in, you submit and then form empties
+})
+
+/////////////////////////////
+////////////////////////////
+
+
+document.querySelector('button').addEventListener('click', (e) => {
+  e.preventDefault();
+  const bookStore = {
+//     //name: document.querySelector('#name').value,
+    address: document.querySelector('#address').value,
+  }
+})
+
 
 
 ////////////////////////////////////////////
